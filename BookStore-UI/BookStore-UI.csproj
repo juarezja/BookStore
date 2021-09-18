@@ -6,7 +6,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Users\Register.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Users\Register.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Users\Register.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Users\Register.razor" />
   </ItemGroup>
 
 </Project>

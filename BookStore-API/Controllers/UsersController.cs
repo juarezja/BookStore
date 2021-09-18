@@ -48,10 +48,11 @@ namespace BookStore_API.Controllers
             var location = GetControllerActionNames();
             try
             {
-                var username = userDTO.EmailAdress;
+                var username = userDTO.UserName;
+                var emailadress = userDTO.EmailAdress;
                 var password = userDTO.Password;
                 _logger.LogInfo($"{location}: Registration Attempt from user {username}");
-                var user = new IdentityUser { Email = username, UserName = username };
+                var user = new IdentityUser { Email = emailadress, UserName = username };
                 var result = await _userManager.CreateAsync(user, password);
 
                 if (!result.Succeeded)
@@ -80,28 +81,31 @@ namespace BookStore_API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserDTO userDTO)
         {
-            var location = GetControllerActionNames();
-            try
-            {
-                var emailAdress = userDTO.EmailAdress;
+            //var location = GetControllerActionNames();
+            //try
+            //{
+                var username = userDTO.UserName;
+                var emailadress = userDTO.EmailAdress;
                 var password = userDTO.Password;
-                _logger.LogInfo($"{location}: Login Attempt from user {emailAdress}");
-                var result = await _signInManager.PasswordSignInAsync(emailAdress, password, false, false);
+                //_logger.LogInfo($"{location}: Login Attempt from user {emailadress}");
+                var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
 
-                if (result.Succeeded)
+                //if (result.Succeeded)
+                if (result!=null)
                 {
-                    _logger.LogInfo($"{location}: {emailAdress} Successfully Authenticated");
-                    var user = await _userManager.FindByNameAsync(emailAdress);
-                    var tokenString = await GenerateJSONWebToken(user);
-                    return Ok(new { token = tokenString });
+                    //_logger.LogInfo($"{location}: {emailadress} Successfully Authenticated");
+                    var user = await _userManager.FindByNameAsync(username);
+                //var tokenString = await GenerateJSONWebToken(user);
+                //return Ok(new { token = tokenString });
+                return Ok(user);
                 }
-                _logger.LogInfo($"{location}: {emailAdress} Not authenticated");
-                return Unauthorized(userDTO);
-            }
-            catch (Exception e)
-            {
-                return InternalError($"{location}: {e.Message}  -  {e.InnerException}");
-            }
+            //_logger.LogInfo($"{location}: {emailadress} Not authenticated");
+            return Unauthorized(userDTO);
+            //}
+            //catch (Exception e)
+            //{
+            //    return InternalError($"{location}: {e.Message}  -  {e.InnerException}");
+            //}
         }
         private async Task<string> GenerateJSONWebToken(IdentityUser user)
         {

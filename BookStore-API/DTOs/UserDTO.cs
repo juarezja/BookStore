@@ -8,8 +8,9 @@ namespace BookStore_API.DTOs
 {
     public class UserDTO
     {
+        public string UserName { get; set; }
         [Required]
-        //[EmailAddress]
+        [EmailAddress]
         public string EmailAdress { get; set; }
         [Required]
         [DataType(DataType.Password)]
