@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Authors\Delete.razor" />
     <Content Remove="Pages\Users\Register.razor" />
   </ItemGroup>
 
@@ -20,11 +21,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Authors\Delete.razor" />
     <_ContentIncludedByDefault Remove="Pages\Users\Register.razor" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Authors\Delete.razor" />
     <None Include="Pages\Users\Register.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Authors\Delete.razor" />
   </ItemGroup>
 
 </Project>

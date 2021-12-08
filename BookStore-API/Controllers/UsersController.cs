@@ -95,9 +95,9 @@ namespace BookStore_API.Controllers
                 {
                     //_logger.LogInfo($"{location}: {emailadress} Successfully Authenticated");
                     var user = await _userManager.FindByNameAsync(username);
-                //var tokenString = await GenerateJSONWebToken(user);
-                //return Ok(new { token = tokenString });
-                return Ok(user);
+                var tokenString = await GenerateJSONWebToken(user);
+                return Ok(new { token = tokenString });
+                //return Ok(user);
                 }
             //_logger.LogInfo($"{location}: {emailadress} Not authenticated");
             return Unauthorized(userDTO);
